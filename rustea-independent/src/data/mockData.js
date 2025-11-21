@@ -1,0 +1,167 @@
+export const categories = [
+  {
+    id: "1",
+    name: "Зеленый чай",
+    description: "Свежие и тонизирующие зеленые чаи с минимальной ферментацией",
+    image_url: "https://avatars.mds.yandex.net/i?id=0afaa6c3d4757f1787cb5f8b60cb9c17_l-4146380-images-thumbs&n=13",
+    color: "#4ade80"
+  },
+  {
+    id: "2",
+    name: "Черный чай", 
+    description: "Крепкие и насыщенные черные чаи с глубоким вкусом",
+    image_url: "https://ir.ozone.ru/s3/multimedia-p/w1200/6761344381.jpg",
+    color: "#dc2626"
+  },
+  {
+    id: "3",
+    name: "Улун",
+    description: "Полуферментированные чаи с богатым вкусовым профилем",
+    image_url: "https://avatars.mds.yandex.net/get-mpic/6251774/img_id1912502579449704847.jpeg/orig",
+    color: "#ea580c"
+  },
+  {
+    id: "4",
+    name: "Пуэр",
+    description: "Выдержанные чаи с уникальным земляным вкусом",
+    image_url: "https://img.shop.rusteaco.ru/images/products/1/5859/686274275/b61c1b5abf2baf1f5639f292ce262a43.jpg",
+    color: "#7c2d12"
+  },
+  {
+    id: "5",
+    name: "Травяной чай",
+    description: "Ароматные травяные сборы без кофеина",
+    image_url: "https://cdn.culture.ru/images/3e340c39-44cf-5161-a2ca-d886da9775d5",
+    color: "#16a34a"
+  },
+  {
+    id: "6",
+    name: "Фруктовый чай",
+    description: "Яркие фруктовые смеси с натуральными ароматами",
+    image_url: "https://avatars.mds.yandex.net/i?id=abdf264f887b2daa3d3b8a8887459e13_l-10114686-images-thumbs&n=13",
+    color: "#ec4899"
+  }
+]
+
+export const drinks = [
+  {
+    id: "1",
+    name: "Жасминовый жемчуг",
+    category_id: "1",
+    description: "Изысканный зеленый чай, скрученный в мелкие жемчужины, с тонким ароматом цветков жасмина. Обладает нежным сладковатым вкусом и долгим послевкусием.",
+    origin: "Китай, Фуцзянь",
+    brewing_temp: "80°C",
+    brewing_time: "3-4 минуты",
+    taste_notes: ["цветочный", "сладкий", "нежный", "жасмин"],
+    caffeine_level: "средний",
+    health_benefits: ["антиоксиданты", "расслабление", "улучшение пищеварения", "очищение организма"],
+    image_url: "https://sc03.alicdn.com/kf/H93d1c75552e54b27a5cbf36db4a69acfL.jpg",
+    rating: 4.7,
+    created_date: "2024-01-15T10:00:00Z"
+  },
+  {
+    id: "2",
+    name: "Ассам Голден Типс",
+    category_id: "2",
+    description: "Элитный черный чай из региона Ассам с золотистыми типсами. Обладает насыщенным malt-вкусом с медовыми нотами.",
+    origin: "Индия, Ассам",
+    brewing_temp: "95°C", 
+    brewing_time: "4-5 минут",
+    taste_notes: ["мальтированный", "медовый", "пряный", "крепкий"],
+    caffeine_level: "высокий",
+    health_benefits: ["бодрость", "улучшение концентрации", "антиоксиданты"],
+    image_url: "https://irecommend.ru/sites/default/files/imagecache/copyright1/user-images/1431963/COATRWZ3EcAEnrbEIz5iw.jpg",
+    rating: 4.5,
+    created_date: "2024-01-10T14:30:00Z"
+  },
+  {
+    id: "3", 
+    name: "Те Гуань Инь",
+    category_id: "3",
+    description: "Знаменитый улун с орхидеевым ароматом. Занимает промежуточное положение между зеленым и черным чаем.",
+    origin: "Китай, Фуцзянь",
+    brewing_temp: "90°C",
+    brewing_time: "2-3 минуты",
+    taste_notes: ["орхидея", "сливочный", "цветочный", "сладковатый"],
+    caffeine_level: "средний", 
+    health_benefits: ["омоложение", "нормализация веса", "улучшение кожи"],
+    image_url: "https://avatars.mds.yandex.net/i?id=ec8180c8df1e326dd66b7935acc5d190_l-10725450-images-thumbs&n=13",
+    rating: 4.8,
+    created_date: "2024-01-12T09:15:00Z"
+  },
+  {
+    id: "4",
+    name: "Шу Пуэр Королевский",
+    category_id: "4", 
+    description: "Выдержанный пуэр с землистым вкусом и глубоким ароматом. Идеален для вечернего чаепития.",
+    origin: "Китай, Юньнань",
+    brewing_temp: "95°C",
+    brewing_time: "3-5 минут", 
+    taste_notes: ["землистый", "древесный", "ореховый", "глубокий"],
+    caffeine_level: "низкий",
+    health_benefits: ["снижение холестерина", "детокс", "улучшение метаболизма"],
+    image_url: "https://avatars.mds.yandex.net/i?id=122c4e9007bfd20f545d50048c1bc37f_l-5353579-images-thumbs&n=13",
+    rating: 4.6,
+    created_date: "2024-01-08T16:45:00Z"
+  },
+  {
+    id: "5",
+    name: "Ройбуш Ванильный",
+    category_id: "5",
+    description: "Натуральный травяной чай из Южной Африки с нежным ванильным ароматом. Не содержит кофеина.",
+    origin: "Южная Африка",
+    brewing_temp: "95°C",
+    brewing_time: "5-7 минут",
+    taste_notes: ["ванильный", "сладкий", "ореховый", "нежный"],
+    caffeine_level: "без кофеина",
+    health_benefits: ["расслабление", "улучшение сна", "антиоксиданты", "гипоаллергенный"],
+    image_url: "https://avatars.mds.yandex.net/get-mpic/5219097/img_id569467157681092067.jpeg/orig", 
+    rating: 4.4,
+    created_date: "2024-01-14T11:20:00Z"
+  },
+  {
+    id: "6",
+    name: "Эрл Грей",
+    category_id: "2",
+    description: "Классический черный чай с маслом бергамота. Идеальный выбор для утреннего чаепития.",
+    origin: "Шри-Ланка",
+    brewing_temp: "95°C",
+    brewing_time: "4-5 минут",
+    taste_notes: ["бергамот", "цитрусовый", "ароматный", "бодрящий"],
+    caffeine_level: "высокий",
+    health_benefits: ["бодрость", "улучшение настроения", "антистресс"],
+    image_url: "https://cdn1.ozone.ru/s3/multimedia-x/6822102777.jpg",
+    rating: 4.3,
+    created_date: "2024-01-09T13:10:00Z"
+  },
+  {
+    id: "7",
+    name: "Молочный улун",
+    category_id: "3", 
+    description: "Нежный улун с кремовым молочным вкусом и цветочным ароматом. Очень популярен среди начинающих.",
+    origin: "Китай, Тайвань",
+    brewing_temp: "85°C",
+    brewing_time: "2-3 минуты",
+    taste_notes: ["молочный", "сливочный", "нежный", "сладкий"],
+    caffeine_level: "низкий",
+    health_benefits: ["расслабление", "улучшение пищеварения", "антиоксиданты"],
+    image_url: "https://ir.ozone.ru/s3/multimedia-f/6589708575.jpg",
+    rating: 4.5,
+    created_date: "2024-01-11T15:30:00Z"
+  },
+  {
+    id: "8",
+    name: "Ягодный микс",
+    category_id: "6",
+    description: "Фруктовый чай с ярким ягодным букетом. Сочетание клубники, малины и черники.",
+    origin: "Смесь",
+    brewing_temp: "95°C",
+    brewing_time: "5-7 минут", 
+    taste_notes: ["клубника", "малина", "черника", "фруктовый"],
+    caffeine_level: "без кофеина",
+    health_benefits: ["витамины", "антиоксиданты", "улучшение иммунитета"],
+    image_url: "https://dostavka.phali-hinkali.ru/penza/api2/images/IikoProducts954/e21fbfb852-1_1000x.jpg",
+    rating: 4.2,
+    created_date: "2024-01-13T12:00:00Z"
+  }
+]
