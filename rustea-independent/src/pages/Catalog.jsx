@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select-fixed'
 import { Search, SlidersHorizontal, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 import DrinkCard from '../components/catalog/DrinkCard'
@@ -160,45 +159,42 @@ export default function Catalog() {
             </div>
 
             {/* Category Filter */}
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="h-11">
-                <SelectValue placeholder="Категория" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Все категории</SelectItem>
-                {categories.map(cat => (
-                  <SelectItem key={cat.id} value={cat.id}>
-                    {cat.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
+            <Select 
+              value={selectedCategory} 
+              onValueChange={setSelectedCategory}
+              placeholder="Категория"
+            >
+              <SelectItem value="all">Все категории</SelectItem>
+              {categories.map(cat => (
+                <SelectItem key={cat.id} value={cat.id}>
+                  {cat.name}
+                </SelectItem>
+              ))}
             </Select>
 
             {/* Caffeine Filter */}
-            <Select value={caffeineFilter} onValueChange={setCaffeineFilter}>
-              <SelectTrigger className="h-11">
-                <SelectValue placeholder="Уровень кофеина" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Любой уровень</SelectItem>
-                <SelectItem value="без кофеина">Без кофеина</SelectItem>
-                <SelectItem value="низкий">Низкий</SelectItem>
-                <SelectItem value="средний">Средний</SelectItem>
-                <SelectItem value="высокий">Высокий</SelectItem>
-              </SelectContent>
+            <Select 
+              value={caffeineFilter} 
+              onValueChange={setCaffeineFilter}
+              placeholder="Уровень кофеина"
+            >
+              <SelectItem value="all">Любой уровень</SelectItem>
+              <SelectItem value="без кофеина">Без кофеина</SelectItem>
+              <SelectItem value="низкий">Низкий</SelectItem>
+              <SelectItem value="средний">Средний</SelectItem>
+              <SelectItem value="высокий">Высокий</SelectItem>
             </Select>
 
             {/* Sort */}
-            <Select value={sortBy} onValueChange={setSortBy}>
-              <SelectTrigger className="h-11">
-                <SelectValue placeholder="Сортировка" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="-rating">По рейтингу ↓</SelectItem>
-                <SelectItem value="rating">По рейтингу ↑</SelectItem>
-                <SelectItem value="-created_date">Новинки</SelectItem>
-                <SelectItem value="name">По названию</SelectItem>
-              </SelectContent>
+            <Select 
+              value={sortBy} 
+              onValueChange={setSortBy}
+              placeholder="Сортировка"
+            >
+              <SelectItem value="-rating">По рейтингу ↓</SelectItem>
+              <SelectItem value="rating">По рейтингу ↑</SelectItem>
+              <SelectItem value="-created_date">Новинки</SelectItem>
+              <SelectItem value="name">По названию</SelectItem>
             </Select>
           </div>
 
