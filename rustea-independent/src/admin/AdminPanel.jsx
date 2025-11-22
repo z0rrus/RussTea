@@ -38,7 +38,7 @@ export default function AdminPanel() {
       setLoading(true)
       const [drinks, categoriesData] = await Promise.all([
         dataService.getDrinks(),
-        Promise.resolve(dataService.getCategories())
+        dataService.getCategories()
       ])
       setDrinksList(drinks)
       setCategories(categoriesData)
@@ -112,6 +112,8 @@ export default function AdminPanel() {
         image_url: '',
         rating: 4.5
       })
+      setCurrentTasteNote('')
+      setCurrentHealthBenefit('')
       
     } catch (error) {
       alert('Ошибка при добавлении чая: ' + error.message)
@@ -179,8 +181,156 @@ export default function AdminPanel() {
                 </div>
               </div>
 
-              {/* ... остальная форма без изменений ... */}
-              
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Происхождение</label>
+                <Input
+                  value={newDrink.origin}
+                  onChange={(e) => setNewDrink({...newDrink, origin: e.target.value})}
+                  placeholder="Например: Китай, Фуцзянь"
+                  disabled={loading}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Описание *</label>
+                <Textarea
+                  value={newDrink.description}
+                  onChange={(e) => setNewDrink({...newDrink, description: e.target.value})}
+                  placeholder="Подробное описание вкуса и аромата..."
+                  rows={3}
+                  required
+                  disabled={loading}
+                />
+              </div>
+
+              {/* Параметры заваривания */}
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Температура заваривания</label>
+                  <Input
+                    value={newDrink.brewing_temp}
+                    onChange={(e) => setNewDrink({...newDrink, brewing_temp: e.target.value})}
+                    placeholder="80°C"
+                    disabled={loading}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Время заваривания</label>
+                  <Input
+                    value={newDrink.brewing_time}
+                    onChange={(e) => setNewDrink({...newDrink, brewing_time: e.target.value})}
+                    placeholder="3-4 минуты"
+                    disabled={loading}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Уровень кофеина</label>
+                  <select
+                    value={newDrink.caffeine_level}
+                    onChange={(e) => setNewDrink({...newDrink, caffeine_level: e.target.value})}
+                    className="w-full p-2 border rounded-lg"
+                    disabled={loading}
+                  >
+                    <option value="без кофеина">Без кофеина</option>
+                    <option value="низкий">Низкий</option>
+                    <option value="средний">Средний</option>
+                    <option value="высокий">Высокий</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Вкусовые ноты */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Вкусовые ноты</label>
+                <div className="flex gap-2">
+                  <Input
+                    value={currentTasteNote}
+                    onChange={(e) => setCurrentTasteNote(e.target.value)}
+                    placeholder="Добавить вкусовую ноту"
+                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTasteNote())}
+                    disabled={loading}
+                  />
+                  <Button type="button" onClick={addTasteNote} disabled={loading}>
+                    <Plus className="w-4 h-4" />
+                  </Button>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {newDrink.taste_notes.map((note, index) => (
+                    <Badge key={index} variant="secondary" className="flex items-center gap-1">
+                      {note}
+                      <X 
+                        className="w-3 h-3 cursor-pointer" 
+                        onClick={() => !loading && removeTasteNote(note)}
+                      />
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {/* Польза для здоровья */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Польза для здоровья</label>
+                <div className="flex gap-2">
+                  <Input
+                    value={currentHealthBenefit}
+                    onChange={(e) => setCurrentHealthBenefit(e.target.value)}
+                    placeholder="Добавить пользу для здоровья"
+                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addHealthBenefit())}
+                    disabled={loading}
+                  />
+                  <Button type="button" onClick={addHealthBenefit} disabled={loading}>
+                    <Plus className="w-4 h-4" />
+                  </Button>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {newDrink.health_benefits.map((benefit, index) => (
+                    <Badge key={index} variant="secondary" className="flex items-center gap-1">
+                      {benefit}
+                      <X 
+                        className="w-3 h-3 cursor-pointer" 
+                        onClick={() => !loading && removeHealthBenefit(benefit)}
+                      />
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {/* Ссылка на изображение */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Ссылка на изображение</label>
+                <Input
+                  value={newDrink.image_url}
+                  onChange={(e) => setNewDrink({...newDrink, image_url: e.target.value})}
+                  placeholder="https://example.com/image.jpg"
+                  disabled={loading}
+                />
+              </div>
+
+              {/* Рейтинг */}
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Рейтинг (0-5)</label>
+                <Input
+                  type="number"
+                  min="0"
+                  max="5"
+                  step="0.1"
+                  value={newDrink.rating}
+                  onChange={(e) => setNewDrink({...newDrink, rating: parseFloat(e.target.value)})}
+                  placeholder="4.5"
+                  disabled={loading}
+                />
+              </div>
+
+              <Button 
+                type="submit" 
+                className="w-full bg-green-600 hover:bg-green-700"
+                disabled={loading}
+              >
+                <Save className="w-4 h-4 mr-2" />
+                {loading ? 'Добавление...' : 'Добавить чай'}
+              </Button>
             </form>
           </CardContent>
         </Card>

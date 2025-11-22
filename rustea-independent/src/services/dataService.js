@@ -20,16 +20,52 @@ const getStoredUser = () => {
 class DataService {
   // Категории (пока оставляем локально, можно потом перенести в API)
   getCategories() {
-    const categories = [
-      { id: '1', name: 'Зеленый чай' },
-      { id: '2', name: 'Черный чай' },
-      { id: '3', name: 'Улун' },
-      { id: '4', name: 'Пуэр' },
-      { id: '5', name: 'Травяной чай' },
-      { id: '6', name: 'Фруктовый чай' }
-    ]
-    return Promise.resolve(categories)
-  }
+  const categories = [
+    {
+      id: '1',
+      name: 'Зеленый чай',
+      description: 'Свежие и тонизирующие зеленые чаи с минимальной ферментацией',
+      image_url: 'https://avatars.mds.yandex.net/i?id=0afaa6c3d4757f1787cb5f8b60cb9c17_l-4146380-images-thumbs&n=13',
+      color: '#4ade80'
+    },
+    {
+      id: '2', 
+      name: 'Черный чай',
+      description: 'Крепкие и насыщенные черные чаи с глубоким вкусом',
+      image_url: 'https://ir.ozone.ru/s3/multimedia-p/w1200/6761344381.jpg',
+      color: '#dc2626'
+    },
+    {
+      id: '3',
+      name: 'Улун',
+      description: 'Полуферментированные чаи с богатым вкусовым профилем',
+      image_url: 'https://avatars.mds.yandex.net/get-mpic/6251774/img_id1912502579449704847.jpeg/orig',
+      color: '#ea580c'
+    },
+    {
+      id: '4',
+      name: 'Пуэр',
+      description: 'Выдержанные чаи с уникальным земляным вкусом',
+      image_url: 'https://img.shop.rusteaco.ru/images/products/1/5859/686274275/b61c1b5abf2baf1f5639f292ce262a43.jpg',
+      color: '#7c2d12'
+    },
+    {
+      id: '5',
+      name: 'Травяной чай',
+      description: 'Ароматные травяные сборы без кофеина',
+      image_url: 'https://cdn.culture.ru/images/3e340c39-44cf-5161-a2ca-d886da9775d5',
+      color: '#16a34a'
+    },
+    {
+      id: '6',
+      name: 'Фруктовый чай', 
+      description: 'Яркие фруктовые смеси с натуральными ароматами',
+      image_url: 'https://avatars.mds.yandex.net/i?id=abdf264f887b2daa3d3b8a8887459e13_l-10114686-images-thumbs&n=13',
+      color: '#ec4899'
+    }
+  ]
+  return Promise.resolve(categories)
+}
 
   getCategoryById(id) {
     const categories = [
