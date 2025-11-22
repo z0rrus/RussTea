@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Catalog from './pages/Catalog'
 import DrinkDetail from './pages/DrinkDetail'
 import Favorites from './pages/Favorites'
+import AdminPanel from './admin/AdminPanel'
 
 function App() {
   const location = useLocation()
@@ -22,6 +23,7 @@ function App() {
         <Route path="/catalog" element={<Catalog />} />
         <Route path="/drink" element={<DrinkDetail />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/admin" element={<AdminPanel />} />
       </Routes>
     </Layout>
   )
