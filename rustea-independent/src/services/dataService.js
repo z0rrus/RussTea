@@ -1,4 +1,4 @@
-import { categories, drinks } from '../data/mockData'
+import { apiService } from './apiService'
 
 // Получаем данные из localStorage или используем начальные
 const getStoredFavorites = () => {
@@ -18,55 +18,89 @@ const getStoredUser = () => {
 }
 
 class DataService {
-  // Категории
+  // Категории (пока оставляем локально, можно потом перенести в API)
   getCategories() {
+    const categories = [
+      { id: '1', name: 'Зеленый чай' },
+      { id: '2', name: 'Черный чай' },
+      { id: '3', name: 'Улун' },
+      { id: '4', name: 'Пуэр' },
+      { id: '5', name: 'Травяной чай' },
+      { id: '6', name: 'Фруктовый чай' }
+    ]
     return Promise.resolve(categories)
   }
 
   getCategoryById(id) {
+    const categories = [
+      { id: '1', name: 'Зеленый чай' },
+      { id: '2', name: 'Черный чай' },
+      { id: '3', name: 'Улун' },
+      { id: '4', name: 'Пуэр' },
+      { id: '5', name: 'Травяной чай' },
+      { id: '6', name: 'Фруктовый чай' }
+    ]
     const category = categories.find(c => c.id === id)
     return Promise.resolve(category)
   }
 
-  // Напитки
-  getDrinks(sortBy = '-rating', limit = null) {
-    let sortedDrinks = [...drinks]
-    
-    // Сортировка
-    if (sortBy === '-rating') {
-      sortedDrinks.sort((a, b) => (b.rating || 0) - (a.rating || 0))
-    } else if (sortBy === 'rating') {
-      sortedDrinks.sort((a, b) => (a.rating || 0) - (b.rating || 0))
-    } else if (sortBy === '-created_date') {
-      sortedDrinks.sort((a, b) => new Date(b.created_date || 0) - new Date(a.created_date || 0))
-    } else if (sortBy === 'name') {
-      sortedDrinks.sort((a, b) => a.name.localeCompare(b.name))
+  // Напитки - теперь из API
+  async getDrinks(sortBy = '-rating', limit = null) {
+    try {
+      const drinks = await apiService.getDrinks()
+      let sortedDrinks = [...drinks]
+      
+      // Сортировка
+      if (sortBy === '-rating') {
+        sortedDrinks.sort((a, b) => (b.rating || 0) - (a.rating || 0))
+      } else if (sortBy === 'rating') {
+        sortedDrinks.sort((a, b) => (a.rating || 0) - (b.rating || 0))
+      } else if (sortBy === '-created_date') {
+        sortedDrinks.sort((a, b) => new Date(b.created_date || 0) - new Date(a.created_date || 0))
+      } else if (sortBy === 'name') {
+        sortedDrinks.sort((a, b) => a.name.localeCompare(b.name))
+      }
+      
+      return limit ? sortedDrinks.slice(0, limit) : sortedDrinks
+    } catch (error) {
+      console.error('Ошибка загрузки чаев:', error)
+      return [] // Возвращаем пустой массив в случае ошибки
     }
-    
-    return Promise.resolve(limit ? sortedDrinks.slice(0, limit) : sortedDrinks)
   }
 
-  filterDrinks(filters = {}) {
-    let filtered = [...drinks]
-    
-    if (filters.category_id && filters.category_id !== 'all') {
-      filtered = filtered.filter(d => d.category_id === filters.category_id)
-    }
-    
-    if (filters.caffeine_level && filters.caffeine_level !== 'all') {
-      filtered = filtered.filter(d => d.caffeine_level === filters.caffeine_level)
-    }
+  async filterDrinks(filters = {}) {
+    try {
+      const drinks = await apiService.getDrinks()
+      let filtered = [...drinks]
+      
+      if (filters.category_id && filters.category_id !== 'all') {
+        filtered = filtered.filter(d => d.category_id === filters.category_id)
+      }
+      
+      if (filters.caffeine_level && filters.caffeine_level !== 'all') {
+        filtered = filtered.filter(d => d.caffeine_level === filters.caffeine_level)
+      }
 
-    if (filters.id) {
-      filtered = filtered.filter(d => d.id === filters.id)
+      if (filters.id) {
+        filtered = filtered.filter(d => d.id === filters.id)
+      }
+      
+      return filtered
+    } catch (error) {
+      console.error('Ошибка фильтрации чаев:', error)
+      return []
     }
-    
-    return Promise.resolve(filtered)
   }
 
-  getDrinkById(id) {
-    const drink = drinks.find(d => d.id === id)
-    return Promise.resolve(drink)
+  async getDrinkById(id) {
+    try {
+      const drinks = await apiService.getDrinks()
+      const drink = drinks.find(d => d.id === id)
+      return drink || null
+    } catch (error) {
+      console.error('Ошибка поиска чая:', error)
+      return null
+    }
   }
 
   // Избранное
