@@ -65,45 +65,46 @@ export default function PriceComparison({ drink }) {
 
   return (
     <Card className="border-2 border-amber-100">
-      <CardHeader className="border-b border-amber-100 bg-gradient-to-r from-amber-50 to-orange-50">
-        <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 text-2xl">
-            <ShoppingCart className="w-6 h-6 text-amber-700" />
+      <CardHeader className="border-b border-amber-100 bg-gradient-to-r from-amber-50 to-orange-50 p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <CardTitle className="flex items-center gap-2 text-lg sm:text-xl lg:text-2xl">
+            <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 text-amber-700" />
             Сравнение РЕАЛЬНЫХ цен
           </CardTitle>
           <Button
             onClick={searchPrices}
             disabled={isSearching}
-            className="bg-amber-600 hover:bg-amber-700"
+            className="bg-amber-600 hover:bg-amber-700 w-full sm:w-auto"
+            size="sm"
           >
             {isSearching ? (
               <>
                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Ищем реальные цены...
+                Поиск...
               </>
             ) : (
               <>
                 <Search className="w-4 h-4 mr-2" />
-                {hasSearched ? 'Обновить цены' : 'Найти реальные цены'}
+                {hasSearched ? 'Обновить' : 'Найти цены'}
               </>
             )}
           </Button>
         </div>
       </CardHeader>
 
-      <CardContent className="p-6">
+      <CardContent className="p-4 sm:p-6">
         <AnimatePresence mode="wait">
           {searchError ? (
             <motion.div
               key="error"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-lg"
+              className="flex items-start gap-3 p-3 bg-red-50 border border-red-200 rounded-lg text-sm"
             >
-              <AlertCircle className="w-5 h-5 text-red-500" />
+              <AlertCircle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
               <div>
                 <p className="text-red-800 font-medium">{searchError}</p>
-                <p className="text-red-600 text-sm mt-1">
+                <p className="text-red-600 text-xs mt-1">
                   Проверьте API ключ или попробуйте другой напиток
                 </p>
               </div>
@@ -116,13 +117,13 @@ export default function PriceComparison({ drink }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex flex-col items-center justify-center py-12"
+              className="flex flex-col items-center justify-center py-8 sm:py-12"
             >
-              <Loader2 className="w-12 h-12 text-amber-600 animate-spin mb-4" />
-              <p className="text-gray-600 text-center font-medium">
+              <Loader2 className="w-8 h-8 sm:w-12 sm:h-12 text-amber-600 animate-spin mb-3 sm:mb-4" />
+              <p className="text-gray-600 text-center font-medium text-sm sm:text-base">
                 Ищем РЕАЛЬНЫЕ цены в онлайн-магазинах...
               </p>
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-xs sm:text-sm text-gray-500 mt-2">
                 Это может занять несколько секунд
               </p>
             </motion.div>
@@ -131,14 +132,14 @@ export default function PriceComparison({ drink }) {
               key="results"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="space-y-4"
+              className="space-y-3 sm:space-y-4"
             >
-              <div className="flex items-center justify-between mb-2">
-                <p className="text-sm text-gray-600">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+                <p className="text-xs sm:text-sm text-gray-600">
                   Найдено реальных товаров: <span className="font-semibold">{prices.length}</span>
                 </p>
                 {minPrice && (
-                  <Badge className="bg-green-100 text-green-800">
+                  <Badge className="bg-green-100 text-green-800 text-xs">
                     Лучшая цена: {minPrice} ₽
                   </Badge>
                 )}
@@ -152,19 +153,21 @@ export default function PriceComparison({ drink }) {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className={`p-4 rounded-xl border-2 transition-all ${
+                    className={`p-3 sm:p-4 rounded-xl border-2 transition-all ${
                       isLowest 
                         ? 'border-green-400 bg-green-50 shadow-sm' 
                         : 'border-gray-200 bg-white hover:border-amber-200 hover:shadow-md'
                     }`}
                   >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <h4 className="font-bold text-gray-900">{price.shop_name}</h4>
+                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-wrap items-center gap-1 sm:gap-2 mb-2">
+                          <h4 className="font-bold text-gray-900 text-sm sm:text-base truncate">
+                            {price.shop_name}
+                          </h4>
 
                           {isLowest && (
-                            <Badge className="bg-green-500 text-white flex items-center gap-1">
+                            <Badge className="bg-green-500 text-white flex items-center gap-1 text-xs">
                               <TrendingDown className="w-3 h-3" />
                               Лучшая цена
                             </Badge>
@@ -176,16 +179,16 @@ export default function PriceComparison({ drink }) {
                           )}
                         </div>
                         
-                        <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+                        <p className="text-xs sm:text-sm text-gray-600 mb-2 line-clamp-2">
                           {price.product_title}
                         </p>
 
                         <div className="flex items-baseline gap-2">
-                          <span className={`text-3xl font-bold ${isLowest ? 'text-green-700' : 'text-gray-900'}`}>
+                          <span className={`text-xl sm:text-2xl lg:text-3xl font-bold ${isLowest ? 'text-green-700' : 'text-gray-900'}`}>
                             {price.price} ₽
                           </span>
                           {price.weight && (
-                            <span className="text-sm text-gray-500">• {price.weight}</span>
+                            <span className="text-xs sm:text-sm text-gray-500">• {price.weight}</span>
                           )}
                         </div>
                       </div>
@@ -194,14 +197,16 @@ export default function PriceComparison({ drink }) {
                         href={price.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="ml-4 flex-shrink-0"
+                        className="sm:ml-4 flex-shrink-0"
                       >
                         <Button 
                           size="sm" 
-                          className={isLowest ? 'bg-green-600 hover:bg-green-700' : 'bg-amber-600 hover:bg-amber-700'}
+                          className={`w-full sm:w-auto ${
+                            isLowest ? 'bg-green-600 hover:bg-green-700' : 'bg-amber-600 hover:bg-amber-700'
+                          }`}
                         >
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Купить сейчас
+                          <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                          Купить
                         </Button>
                       </a>
                     </div>
@@ -214,16 +219,16 @@ export default function PriceComparison({ drink }) {
               key="no-results"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-12"
+              className="text-center py-8 sm:py-12"
             >
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
+              <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">🔍</div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
                 Реальные товары не найдены
               </h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 text-sm sm:text-base mb-4">
                 Попробуйте другой напиток или обновите поиск
               </p>
-              <Button onClick={searchPrices} variant="outline">
+              <Button onClick={searchPrices} variant="outline" size="sm">
                 Попробовать снова
               </Button>
             </motion.div>
@@ -232,16 +237,16 @@ export default function PriceComparison({ drink }) {
               key="initial"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-12"
+              className="text-center py-8 sm:py-12"
             >
-              <div className="text-6xl mb-4">🛒</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">🛒</div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">
                 Найти РЕАЛЬНЫЕ цены
               </h3>
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4">
                 Мы найдем актуальные цены на "{drink.name}" в реальных магазинах
               </p>
-              <p className="text-sm text-gray-500 mb-4">
+              <p className="text-xs sm:text-sm text-gray-500 mb-4">
                 ⚡ Только настоящие товары • Только реальные цены
               </p>
             </motion.div>
