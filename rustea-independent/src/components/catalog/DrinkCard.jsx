@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { motion } from "framer-motion"
-import { Heart, Star, Thermometer, Clock, Coffee } from 'lucide-react'
+import { Heart, Star, Thermometer, Clock } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { createPageUrl } from '@/utils'
 
@@ -29,15 +29,6 @@ export default function DrinkCard({ drink, onToggleFavorite, isFavorite, index }
               </div>
             )}
             
-            {/* Category Badge - УЛУН */}
-            {drink.category && (
-              <div className="absolute top-3 left-3">
-                <Badge className="bg-amber-500 text-white font-bold text-sm px-3 py-1.5 hover:bg-amber-600 transition-colors">
-                  {drink.category}
-                </Badge>
-              </div>
-            )}
-
             {/* Favorite Button */}
             <button
               onClick={(e) => {
@@ -53,7 +44,7 @@ export default function DrinkCard({ drink, onToggleFavorite, isFavorite, index }
 
             {/* Rating Badge */}
             {drink.rating && (
-              <div className="absolute top-12 left-3 px-2 py-1 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center gap-1">
+              <div className="absolute top-3 left-3 px-2 py-1 rounded-full bg-white/90 backdrop-blur-sm shadow-lg flex items-center gap-1">
                 <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                 <span className="text-sm font-semibold">{drink.rating}</span>
               </div>
@@ -77,45 +68,38 @@ export default function DrinkCard({ drink, onToggleFavorite, isFavorite, index }
               </p>
             )}
 
-            {/* Quick Info Grid - ВЫРОВНЕННЫЕ ОКОШКИ */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
+            {/* Quick Info */}
+            <div className="flex flex-wrap gap-2 mb-4">
               {drink.caffeine_level && (
-                <div className="flex flex-col items-center justify-center p-2 bg-gray-50 rounded-lg border border-gray-200 text-center">
-                  <Coffee className="w-4 h-4 text-gray-600 mb-1" />
-                  <span className="text-xs font-medium text-gray-900">Кофеин</span>
-                  <span className="text-xs text-gray-600">{drink.caffeine_level}</span>
-                </div>
+                <Badge variant="outline" className="text-xs">
+                  {drink.caffeine_level} кофеин
+                </Badge>
               )}
               {drink.brewing_temp && (
-                <div className="flex flex-col items-center justify-center p-2 bg-gray-50 rounded-lg border border-gray-200 text-center">
-                  <Thermometer className="w-4 h-4 text-gray-600 mb-1" />
-                  <span className="text-xs font-medium text-gray-900">Температура</span>
-                  <span className="text-xs text-gray-600">{drink.brewing_temp}</span>
-                </div>
+                <Badge variant="outline" className="text-xs flex items-center gap-1">
+                  <Thermometer className="w-3 h-3" />
+                  {drink.brewing_temp}
+                </Badge>
               )}
               {drink.brewing_time && (
-                <div className="flex flex-col items-center justify-center p-2 bg-gray-50 rounded-lg border border-gray-200 text-center">
-                  <Clock className="w-4 h-4 text-gray-600 mb-1" />
-                  <span className="text-xs font-medium text-gray-900">Время</span>
-                  <span className="text-xs text-gray-600">{drink.brewing_time}</span>
-                </div>
+                <Badge variant="outline" className="text-xs flex items-center gap-1">
+                  <Clock className="w-3 h-3" />
+                  {drink.brewing_time}
+                </Badge>
               )}
             </div>
 
             {/* Taste Notes */}
             {drink.taste_notes && drink.taste_notes.length > 0 && (
-              <div className="mt-3">
-                <p className="text-xs font-semibold text-gray-500 mb-2">Вкусовые ноты</p>
-                <div className="flex flex-wrap gap-1">
-                  {drink.taste_notes.slice(0, 3).map((note, idx) => (
-                    <span 
-                      key={idx}
-                      className="text-xs px-2 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200"
-                    >
-                      {note}
-                    </span>
-                  ))}
-                </div>
+              <div className="flex flex-wrap gap-1">
+                {drink.taste_notes.slice(0, 3).map((note, idx) => (
+                  <span 
+                    key={idx}
+                    className="text-xs px-2 py-1 rounded-full bg-amber-50 text-amber-800"
+                  >
+                    {note}
+                  </span>
+                ))}
               </div>
             )}
           </Link>
