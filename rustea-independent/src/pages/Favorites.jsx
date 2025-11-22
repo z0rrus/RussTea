@@ -100,7 +100,7 @@ export default function Favorites() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-amber-50/30">
       {/* Header */}
-      <div className="bg-gradient-to-r from-rose-600 to-pink-600 text-white py-16">
+      <div className="bg-gradient-to-r from-rose-600 to-pink-600 text-white py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -114,7 +114,7 @@ export default function Favorites() {
             </Link>
             <div className="flex items-center gap-3 mb-4">
               <Heart className="w-10 h-10 fill-white" />
-              <h1 className="text-5xl font-bold">Избранное</h1>
+              <h1 className="text-3xl md:text-5xl font-bold">Избранное</h1>
             </div>
             <p className="text-xl text-white/90">
               Ваша личная коллекция любимых чайных напитков

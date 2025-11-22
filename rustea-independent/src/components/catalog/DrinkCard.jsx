@@ -16,7 +16,7 @@ export default function DrinkCard({ drink, onToggleFavorite, isFavorite, index }
       <Card className="group overflow-hidden border-none shadow-md hover:shadow-2xl transition-all duration-500 h-full">
         <Link to={createPageUrl('DrinkDetail') + `?id=${drink.id}`}>
           {/* Image */}
-          <div className="relative h-56 overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50">
+          <div className="relative h-56 overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 mb-4">
             {drink.image_url ? (
               <img 
                 src={drink.image_url} 
@@ -52,7 +52,7 @@ export default function DrinkCard({ drink, onToggleFavorite, isFavorite, index }
           </div>
         </Link>
 
-        <CardContent className="p-5">
+        <CardContent className="p-5 pt-0">
           <Link to={createPageUrl('DrinkDetail') + `?id=${drink.id}`}>
             <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-700 transition-colors line-clamp-1">
               {drink.name}
