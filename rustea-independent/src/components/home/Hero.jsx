@@ -24,49 +24,49 @@ export default function Hero({ onSearch }) {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-rose-400 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 py-24 md:py-32">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+      <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-32">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-block mb-4 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-amber-200">
-              <span className="text-sm font-medium text-amber-800">
+            <div className="inline-block mb-2 md:mb-4 px-3 py-1 md:px-4 md:py-2 bg-white/60 backdrop-blur-sm rounded-full border border-amber-200">
+              <span className="text-xs md:text-sm font-medium text-amber-800">
                 🍵 Ваш проводник в мир чая
               </span>
             </div>
             
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-5xl md:text-5xl lg:text-7xl font-bold text-gray-900 mb-4 md:mb-6 leading-tight">
               RussTea
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-rose-600">
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-rose-600 text-4xl md:text-4xl lg:text-6xl mt-2">
                 Найдите свой идеальный чай
               </span>
             </h1>
 
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-base md:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed">
               Исследуйте коллекцию изысканных чайных напитков со всего мира. 
               Сравнивайте цены и находите лучшие предложения.
             </p>
 
             {/* Search Bar */}
-            <form onSubmit={handleSearch} className="mb-8">
-              <div className="flex gap-3">
+            <form onSubmit={handleSearch} className="mb-6 md:mb-8">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <div className="relative flex-1">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <Search className="absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 md:w-5 md:h-5" />
                   <Input
                     type="text"
                     placeholder="Поиск чая..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-12 h-14 text-lg border-2 border-amber-200 focus:border-amber-400 rounded-xl"
+                    className="pl-10 md:pl-12 h-12 md:h-14 text-base md:text-lg border-2 border-amber-200 focus:border-amber-400 rounded-xl"
                   />
                 </div>
                 <Button 
                   type="submit"
                   size="lg" 
-                  className="h-14 px-8 bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-lg"
+                  className="h-12 md:h-14 px-6 md:px-8 bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-base md:text-lg"
                 >
                   Найти
                 </Button>
@@ -74,14 +74,14 @@ export default function Hero({ onSearch }) {
             </form>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-3 md:gap-4">
               <Link to={createPageUrl('Catalog')}>
                 <Button 
                   size="lg" 
-                  className="bg-gray-900 hover:bg-gray-800 h-12 px-6"
+                  className="bg-gray-900 hover:bg-gray-800 h-11 md:h-12 px-5 md:px-6 text-sm md:text-base"
                 >
                   Смотреть каталог
-                  <ChevronRight className="w-5 h-5 ml-2" />
+                  <ChevronRight className="w-4 h-4 md:w-5 md:h-5 ml-1 md:ml-2" />
                 </Button>
               </Link>
             </div>
