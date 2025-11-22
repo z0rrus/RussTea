@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import { motion } from 'framer-motion'
 import { 
   Heart, Star, Thermometer, Clock, MapPin, 
-  Coffee, Sparkles, ArrowLeft, Share2 
+  Coffee, Sparkles, ArrowLeft
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { createPageUrl } from '@/utils'
@@ -160,23 +160,17 @@ export default function DrinkDetail() {
               )}
 
               {/* Floating Actions */}
-              <div className="absolute top-6 right-6 flex gap-3">
+              <div className="absolute top-6 right-6">
                 <Button
                   size="icon"
                   onClick={handleToggleFavorite}
                   className={`rounded-full shadow-lg ${
                     isFavorite 
-                      ? 'bg-red-500 hover:bg-red-600' 
-                      : 'bg-white/90 hover:bg-white text-gray-700'
+                      ? 'bg-red-600 hover:bg-red-700' 
+                      : 'bg-gray-800/90 hover:bg-gray-900 text-white'
                   }`}
                 >
                   <Heart className={`w-5 h-5 ${isFavorite ? 'fill-white' : ''}`} />
-                </Button>
-                <Button
-                  size="icon"
-                  className="rounded-full bg-white/90 hover:bg-white text-gray-700 shadow-lg"
-                >
-                  <Share2 className="w-5 h-5" />
                 </Button>
               </div>
 
@@ -196,11 +190,11 @@ export default function DrinkDetail() {
             animate={{ opacity: 1, x: 0 }}
             className="space-y-6"
           >
-            {/* Category Badge */}
+            {/* Category Badge - КРУПНЕЕ И ТЕМНЕЕ */}
             {category && (
               <Link to={createPageUrl('Catalog') + `?category=${category.id}`}>
                 <Badge 
-                  className="text-sm px-3 py-1 bg-amber-100 text-amber-800 hover:bg-amber-200 cursor-pointer"
+                  className="text-lg px-5 py-2.5 bg-gray-900 text-white font-bold hover:bg-gray-800 cursor-pointer shadow-lg"
                 >
                   {category.name}
                 </Badge>
@@ -229,45 +223,45 @@ export default function DrinkDetail() {
 
             <Separator />
 
-            {/* Brewing Info */}
-            <div className="grid grid-cols-2 gap-4">
+            {/* Brewing Info - ИКОНКИ ОПУЩЕНЫ ВНИЗ ДЛЯ РАВНОМЕРНЫХ ОТСТУПОВ */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {drink.brewing_temp && (
-                <Card className="border-amber-200">
-                  <CardContent className="p-4 flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-amber-100">
-                      <Thermometer className="w-6 h-6 text-amber-700" />
+                <Card className="border-amber-200 h-full">
+                  <CardContent className="p-6 flex flex-col items-center text-center h-full justify-between">
+                    <div className="p-3 rounded-full bg-amber-100">
+                      <Thermometer className="w-7 h-7 text-amber-700" />
                     </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Температура</p>
-                      <p className="font-semibold text-gray-900">{drink.brewing_temp}</p>
+                    <div className="mt-4">
+                      <p className="text-sm text-gray-600 mb-1">Температура</p>
+                      <p className="font-semibold text-gray-900 text-xl">{drink.brewing_temp}</p>
                     </div>
                   </CardContent>
                 </Card>
               )}
 
               {drink.brewing_time && (
-                <Card className="border-amber-200">
-                  <CardContent className="p-4 flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-amber-100">
-                      <Clock className="w-6 h-6 text-amber-700" />
+                <Card className="border-amber-200 h-full">
+                  <CardContent className="p-6 flex flex-col items-center text-center h-full justify-between">
+                    <div className="p-3 rounded-full bg-amber-100">
+                      <Clock className="w-7 h-7 text-amber-700" />
                     </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Время заваривания</p>
-                      <p className="font-semibold text-gray-900">{drink.brewing_time}</p>
+                    <div className="mt-4">
+                      <p className="text-sm text-gray-600 mb-1">Время заваривания</p>
+                      <p className="font-semibold text-gray-900 text-xl">{drink.brewing_time}</p>
                     </div>
                   </CardContent>
                 </Card>
               )}
 
               {drink.caffeine_level && (
-                <Card className="border-amber-200">
-                  <CardContent className="p-4 flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-amber-100">
-                      <Coffee className="w-6 h-6 text-amber-700" />
+                <Card className="border-amber-200 h-full">
+                  <CardContent className="p-6 flex flex-col items-center text-center h-full justify-between">
+                    <div className="p-3 rounded-full bg-amber-100">
+                      <Coffee className="w-7 h-7 text-amber-700" />
                     </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Кофеин</p>
-                      <p className="font-semibold text-gray-900 capitalize">{drink.caffeine_level}</p>
+                    <div className="mt-4">
+                      <p className="text-sm text-gray-600 mb-1">Кофеин</p>
+                      <p className="font-semibold text-gray-900 text-xl capitalize">{drink.caffeine_level}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -277,15 +271,15 @@ export default function DrinkDetail() {
             {/* Taste Notes */}
             {drink.taste_notes && drink.taste_notes.length > 0 && (
               <div>
-                <div className="flex items-center gap-2 mb-3">
+                <div className="flex items-center gap-2 mb-4">
                   <Sparkles className="w-5 h-5 text-amber-600" />
-                  <h3 className="text-lg font-semibold text-gray-900">Вкусовые ноты</h3>
+                  <h3 className="text-xl font-semibold text-gray-900">Вкусовые ноты</h3>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {drink.taste_notes.map((note, idx) => (
                     <Badge 
                       key={idx}
-                      className="text-sm px-3 py-1 bg-amber-100 text-amber-800"
+                      className="text-sm px-4 py-2 bg-amber-100 text-amber-800 text-center justify-center border border-amber-200"
                     >
                       {note}
                     </Badge>
@@ -297,17 +291,17 @@ export default function DrinkDetail() {
             {/* Health Benefits */}
             {drink.health_benefits && drink.health_benefits.length > 0 && (
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">
                   Польза для здоровья
                 </h3>
-                <ul className="space-y-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {drink.health_benefits.map((benefit, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <span className="text-green-600 mt-1">✓</span>
+                    <div key={idx} className="flex items-center gap-3 p-3 bg-green-50 rounded-lg border border-green-200">
+                      <span className="text-green-600 text-lg">✓</span>
                       <span className="text-gray-700">{benefit}</span>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
           </motion.div>
